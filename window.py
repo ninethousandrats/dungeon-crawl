@@ -84,7 +84,7 @@ class PaintWidget(QWidget):
         qp.drawLine(LL1x, LL1y, LL0x, LL0y)  # /
         qp.drawLine(LR1x, LR1y, LR0x, LR0y)  # \
         
-        # Move the bear sandwhich ʕ•ᴥ• ʔ☝
+        # Move the bear sandwich ʕ•ᴥ• ʔ☝
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
