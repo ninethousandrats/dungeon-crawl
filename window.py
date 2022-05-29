@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
-from PyQt5.QtGui import QPainter, QColor, QPen
+from PyQt5.QtGui import QPainter, QColor, QPen, QBrush
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import random
@@ -13,7 +13,7 @@ class App(QMainWindow):
         self.left = 20
         self.top = 50
         self.width = 1000
-        self.height = 1000
+        self.height = 600
         self.initUI()
 
     def initUI(self):
@@ -37,54 +37,43 @@ class PaintWidget(QWidget):
     def paintEvent(self, event):
         qp = QPainter(self)
 
-        qp.setPen(Qt.green)
+        qp.setPen(QPen(Qt.green, 2, Qt.SolidLine))
+       # qp.setBrush(QBrush(Qt.yellow, Qt.SolidPattern))
         size = self.size()
+
+
+        #room0
+        qp.drawRect(0, 0, self.width(), self.height())
+        qp.drawRect(self.width()*0.2, self.height()*0.2, self.width()*0.6, self.height()*0.6)
+        
+        #draw diag lines
+        qp.drawLine(0, 0, self.width()*0.2, self.height()*0.2)                         # \  /
+        qp.drawLine(self.width(), 0, self.width()*0.8, self.height()*0.2)
+  
+        qp.drawLine(self.width()*0.2, self.height()*0.8, 0, self.height())             # /  \
+        qp.drawLine(self.width()*0.8, self.height()*0.8, self.width(), self.height())
         
         
-        # Let's build our grid ʕ； •`ᴥ•´ʔ
-      
-        # Square that is close
-        UL0x = 0
-        UL0y = 0
+        #room1
+        qp.drawRect(self.width()*0.3, self.height()*0.3, self.width()*0.4, self.height()*0.4)
         
-        UR0x = self.width()
-        UR0y = 0
+        #draw diag lines
+        qp.drawLine(self.width()*0.2, self.height()*0.2, self.width()*0.3, self.height()*0.3)
+        qp.drawLine(self.width()*0.8, self.height()*0.2, self.width()*0.7, self.height()*0.3)
+  
+        qp.drawLine(self.width()*0.2, self.height()*0.8, self.width()*0.3, self.height()*0.7)
+        qp.drawLine(self.width(), self.height(),self.width()*0.7, self.height()*0.7)
         
-        LL0x = 0
-        LL0y = self.height()
+        #room2
+        qp.drawRect(self.width()*0.35, self.height()*0.35, self.width()*0.3, self.height()*0.3)
         
-        LR0x = self.width()
-        LR0y = self.height()
-        
-        
-        # Square that is... less close.
-        
-        UL1x = self.width() * 0.33
-        UL1y = self.height() * 0.33
-        
-        UR1x = self.width() * 0.66
-        UR1y = self.height() * 0.33
-        
-        LL1x = self.width() * 0.33
-        LL1y = self.height() * 0.66
-        
-        LR1x = self.width() * 0.66
-        LR1y = self.height() * 0.66
-        
-        qp.drawLine(UL0x, UL0y, UL1x, UL1y)  # \
-        qp.drawLine(UR1x, UR1y, UR0x, UR0y)  # /
-        
-        qp.drawLine(UL1x, UL1y, UR1x, UR1y)  # _
-        
-        qp.drawLine(UL1x, UL1y, LL1x, LL1y)  # | <-
-        qp.drawLine(UR1x, UR1y, LR1x, LR1y)  # -> |
-        
-        qp.drawLine(LL1x, LL1y, LR1x, LR1y)  # _
-        
-        qp.drawLine(LL1x, LL1y, LL0x, LL0y)  # /
-        qp.drawLine(LR1x, LR1y, LR0x, LR0y)  # \
-        
-        # Move the bear sandwich ʕ•ᴥ• ʔ☝
+        #draw diag lines
+        qp.drawLine(self.width()*0.3, self.height()*0.3, self.width()*0.35, self.height()*0.35)
+        qp.drawLine(self.width()*0.7, self.height()*0.3, self.width()*0.65, self.height()*0.35)
+  
+        qp.drawLine(self.width()*0.3, self.height()*0.7, self.width()*0.35, self.height()*0.65)
+        qp.drawLine(self.width()*0.7, self.height()*0.7, self.width()*0.65, self.height()*0.65)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
